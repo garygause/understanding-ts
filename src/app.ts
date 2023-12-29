@@ -1,23 +1,41 @@
-function add(n1: number, n2: number): number {
-  return n1 + n2;
+class User {
+  private readonly id: string;
+  name: string;
+
+  constructor(id: string, name: string) {
+    this.name = name;
+  }
+
+  describe() {
+    return 'User: ' + this.name;
+  }
 }
 
-function printResult(num: number): void {
-  console.log('Result: ' + num);
+const user1 = new User('123', 'Gary');
+console.log(user1.describe());
+
+class AdminUser extends User {
+  private permissions: string[];
+
+  constructor(id: string, name: string, permissions: string[]) {
+    super(id, name);
+    this.permissions = permissions;
+  }
+
+  get userPermissions() {
+    return this.permissions;
+  }
+
+  set userPermissions(permissions: string[]) {
+    this.permissions = permissions;
+  }
 }
 
-function addAndHandle(n1: number, n2: number, cb: (num: number) => void) {
-  const result = n1 + n2;
-  cb(result);
+const admin = new AdminUser('123', 'Gary', ['read', 'write']);
+console.log(admin.userPermissions);
+admin.userPermissions = ['read'];
+
+abstract class UserInterface {
+  abstract id: string;
+  abstract describe(): string;
 }
-
-// function type
-let combineValues: (a: number, b: number) => number;
-
-combineValues = add;
-
-console.log(combineValues(8, 5));
-
-addAndHandle(10, 20, (result) => {
-  console.log(result);
-});

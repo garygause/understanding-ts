@@ -1,18 +1,11 @@
 "use strict";
-function add(n1, n2) {
-    return n1 + n2;
+class User {
+    constructor(name) {
+        this.name = name;
+    }
+    describe() {
+        return 'User: ' + this.name;
+    }
 }
-function printResult(num) {
-    console.log('Result: ' + num);
-}
-function addAndHandle(n1, n2, cb) {
-    const result = n1 + n2;
-    cb(result);
-}
-// function type
-let combineValues;
-combineValues = add;
-console.log(combineValues(8, 5));
-addAndHandle(10, 20, (result) => {
-    console.log(result);
-});
+const user1 = new User('Gary');
+console.log(user1.describe());
